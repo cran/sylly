@@ -164,6 +164,7 @@ doc_data <- function(
   email="meik.michalke@hhu.de",
   year=format(Sys.Date(), "%Y"),
   dir=NULL,       # if not NULL, writes results directly to dir/hyph.<lang>-data.R
+  example=c("This", "is", "a", "rather", "stupid", "demonstration"),
   overwrite=FALSE
 ){
   aliases <- paste0("hyph.", lang)
@@ -211,6 +212,12 @@ doc_data <- function(
     "#' [1] \\url{http://tug.ctan.org/tex-archive/language/hyph-utf8/tex/generic/hyph-utf8/patterns/}\n",
     "#'\n",
     "#' [2] \\url{http://www.ctan.org/tex-archive/macros/latex/base/lppl.txt}\n",
+    "#' @examples\n",
+    "#' \\dontrun{\n",
+    "#' library(sylly.", lang, ")\n",
+    "#' sampleText <- c(\"", paste0(example, collapse="\", \""),"\")\n",
+    "#' hyphen(sampleText, hyph.pattern=\"", lang, "\")\n",
+    "#' }\n",
     "NULL\n"
   )
   
@@ -251,13 +258,13 @@ doc_readme <- function(
     "### Development releases via the project repository\n\n",
     "Installation of tha latest stable release is fairly easy, it's available from the project's own repository:\n\n",
     "```r\n",
-    "install.packages(\"sylly.", lang, "\", repo=\"https://reaktanz.de/R\")\n",
+    "install.packages(\"sylly.", lang, "\", repo=\"https://undocumeantit.github.io/repos/l10n\")\n",
     "```\n\n",
-    "To automatically get updates, consider adding the repository to your R configuration.  You might also\n",
-    "want to subscribe to the package's [RSS feed](https://reaktanz.de/R/pckg/sylly.", lang,
+    "To automatically get updates, consider [adding the repository to your R configuration](https://undocumeantit.github.io/repos).  You might also\n",
+    "want to subscribe to the package's [RSS feed](https://undocumeantit.github.io/repos/l10n/pckg/sylly.", lang,
     "/RSS.xml) to get notified of new releases.\n\n",
     "If you're running a Debian based operating system, you might be interested in the\n",
-    "[precompiled *.deb packages](https://reaktanz.de/R/pckg/sylly.", lang, "/deb_repo.html).\n\n",
+    "[precompiled *.deb packages](https://undocumeantit.github.io/repos/l10n/pckg/sylly.", lang, "/deb_repo.html).\n\n",
     "### Installation via GitHub\n\n",
     "To install the package directly from GitHub, you can use `install_github()` from the",
     " [devtools](https://github.com/hadley/devtools) package:\n\n",
@@ -347,6 +354,7 @@ sylly_langpack_skeleton <- function(
   version="0.1-1",
   flattr_user="m.eik",
   github_user="unDocUMeantIt",
+  example=c("This", "is", "a", "rather", "stupid", "demonstration"),
   dir=NULL,  # if not NULL, writes results directly to dir
   overwrite=FALSE
 ){
@@ -384,6 +392,7 @@ sylly_langpack_skeleton <- function(
     email=email,
     year=year,
     dir=R_dir,
+    example=example,
     overwrite=overwrite
   )
   doc_changelog(
@@ -448,6 +457,7 @@ setMethod("sylly_langpack", signature(hyph.pattern="kRp.hyph.pat"),
     version="0.1-1",
     flattr_user="m.eik",
     github_user="unDocUMeantIt",
+    example=c("This", "is", "a", "rather", "stupid", "demonstration"),
     overwrite=FALSE
   ){
     # just make sure we can write something to a proper place
@@ -466,6 +476,7 @@ setMethod("sylly_langpack", signature(hyph.pattern="kRp.hyph.pat"),
       version=version,
       flattr_user=flattr_user,
       github_user=github_user,
+      example=example,
       dir=dir,
       overwrite=overwrite
     )
