@@ -1,4 +1,4 @@
-# Copyright 2010-2017 Meik Michalke <meik.michalke@hhu.de>
+# Copyright 2010-2018 Meik Michalke <meik.michalke@hhu.de>
 #
 # This file is part of the R package sylly.
 #
@@ -595,7 +595,7 @@ kRp.hyphen.calc <- function(
   } else {}
 
   if(identical(as, "kRp.hyphen")){
-    results <- new("kRp.hyphen", lang=lang, desc=desc.stat.res, hyphen=hyph.df[c("syll","word")])
+    results <- kRp_hyphen(lang=lang, desc=desc.stat.res, hyphen=hyph.df[c("syll","word")])
   } else if(identical(as, "data.frame")){
     results <- hyph.df[c("syll","word")]
   } else if(identical(as, "numeric")){
@@ -628,7 +628,7 @@ optimize.hyph.pattern <- function(hyph.pat){
     nm=pattern.matrix[,"char"]
   )
   # "kRp.hyph.pat.env" is an internal class, defined in 01_class_01_kRp.hyph.pat.R
-  new.hyph.pat <- new("kRp.hyph.pat.env",
+  new.hyph.pat <- kRp_hyph_pat_env(
     lang=slot(hyph.pat, "lang"),
     min.pat=min(nchar(pattern.matrix[,"char"])),
     max.pat=max(nchar(pattern.matrix[,"char"])),
@@ -763,3 +763,56 @@ check.file <- function(filename, mode="exist", stopOnFail=TRUE){
 
   return(ret.value)
 } ## end function check.file()
+
+
+## function check_lang_packages()
+# checks what sylly.** packages are currently installed or loaded
+# returns a named list with a list for each installed package, providing
+# entries named "available", "installed", "loaded", and "title"
+# availabe: also check for all available packages in 'repos'
+# available.only: omit all installed packages which cannot be found in 'repos'
+#' @importFrom utils available.packages packageDescription
+check_lang_packages <- function(available=FALSE, repos="https://undocumeantit.github.io/repos/l10n/", available.only=FALSE, pattern="^sylly\\.[[:alpha:]]+$"){
+  ### this function should be kept close to identical to the respective function
+  ### in the 'sylly' package, except for the pattern
+  result <- list()
+  if(isTRUE(available)){
+    available_packages <- utils::available.packages(repos=repos)
+    available_koRpus_lang <- grepl(pattern, available_packages[,"Package"])
+    supported_lang <- unique(available_packages[available_koRpus_lang,"Package"])
+  } else {
+    available_koRpus_lang <- FALSE
+    supported_lang <- NULL
+  }
+
+  loaded_packages <- loadedNamespaces()
+  loaded_koRpus_lang <- grepl(pattern, loaded_packages)
+  installed_packages <- unique(dir(.libPaths()))
+  installed_koRpus_lang <- grepl(pattern, installed_packages)
+
+  have_koRpus_lang <- any(installed_koRpus_lang, available_koRpus_lang)
+
+  if(isTRUE(have_koRpus_lang)){
+    if(isTRUE(available.only)){
+      all_packages <- supported_lang
+    } else {
+      all_packages <- unique(c(installed_packages[installed_koRpus_lang], supported_lang))
+    }
+    for (this_package in all_packages){
+      result[[this_package]] <- list(available=NA, installed=FALSE, loaded=FALSE, title="(unknown)")
+      if(all(isTRUE(available), this_package %in% supported_lang)){
+        result[[this_package]][["available"]] <- TRUE
+      } else {}
+      if(this_package %in% unique(installed_packages[installed_koRpus_lang])){
+        result[[this_package]][["installed"]] <- TRUE
+        this_package_index <- which.min(!installed_packages %in% this_package)
+        result[[this_package]][["title"]] <- utils::packageDescription(installed_packages[this_package_index])[["Title"]]
+      } else {}
+      if(this_package %in% unique(loaded_packages[loaded_koRpus_lang])){
+        result[[this_package]][["loaded"]] <- TRUE
+      } else {}
+    }
+  } else {}
+  
+  return(result)
+} ## end function check_lang_packages()

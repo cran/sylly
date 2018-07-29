@@ -1,4 +1,4 @@
-# Copyright 2017 Meik Michalke <meik.michalke@hhu.de>
+# Copyright 2017-2018 Meik Michalke <meik.michalke@hhu.de>
 #
 # This file is part of the R package sylly.
 #
@@ -109,7 +109,7 @@ doc_hyph_support <- function(
     "#' \n",
     "#' This function adds support for ", lang_name, " to the sylly package. You should not\n",
     "#' need to call it manually, as that is done automatically when this package is\n",
-    "#' loaded.\n",
+    "#' being loaded.\n",
     "#' \n",
     "#' In particular, a new set of hyphenation patterns is being added (see \\code{\\link{hyph.", lang, "}}).\n",
     "#' To use the patterns with \\code{\\link[sylly:hyphen]{hyphen}}, simply use the abbreviation:\n",
@@ -213,11 +213,9 @@ doc_data <- function(
     "#'\n",
     "#' [2] \\url{http://www.ctan.org/tex-archive/macros/latex/base/lppl.txt}\n",
     "#' @examples\n",
-    "#' \\dontrun{\n",
     "#' library(sylly.", lang, ")\n",
     "#' sampleText <- c(\"", paste0(example, collapse="\", \""),"\")\n",
     "#' hyphen(sampleText, hyph.pattern=\"", lang, "\")\n",
-    "#' }\n",
     "NULL\n"
   )
   
@@ -242,26 +240,27 @@ doc_readme <- function(
   author="Meik Michalke",
   email="meik.michalke@hhu.de",
   year=format(Sys.Date(), "%Y"),
-  flattr_user="m.eik",
   github_user="unDocUMeantIt",
   dir=NULL,  # if not NULL, writes results directly to dir/README.md
   overwrite=FALSE
 ){
   doc <- paste0(
     "# sylly.", lang, "\n\n",
-    "[![Flattr this git repo](https://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=", flattr_user,
-    "&url=https://github.com/", github_user, "/sylly.", lang, "&title=sylly.", lang, "&language=en_GB&tags=github&category=software)\n\n",
-    "Adds support for the ", lang_name, " language to the [sylly](https://github.com/unDocUMeantIt/sylly) package.\n",
-    "Due to some restrictions on CRAN, the full package sources are only available from the\n",
-    "[project homepage](http://reaktanz.de/?c=hacking&s=koRpus).\n\n",
+    "Adds support for the ", lang_name, " language to the [sylly](https://github.com/unDocUMeantIt/sylly) package.\n\n",
     "## Installation\n\n",
-    "### Development releases via the project repository\n\n",
-    "Installation of tha latest stable release is fairly easy, it's available from the project's own repository:\n\n",
+    "### Installation from the official l10n repository\n\n",
+    "The latest stable release can be installed directly from the project's own repository:\n\n",
     "```r\n",
-    "install.packages(\"sylly.", lang, "\", repo=\"https://undocumeantit.github.io/repos/l10n\")\n",
+    "install.packages(\n",
+    "  \"sylly.", lang, "\"\n",
+    "  repo=c(\n",
+    "    getOption(\"repos\"),\n",
+    "    l10n=\"https://undocumeantit.github.io/repos/l10n\"\n",
+    "  )\n",
+    ")\n",
     "```\n\n",
-    "To automatically get updates, consider [adding the repository to your R configuration](https://undocumeantit.github.io/repos).  You might also\n",
-    "want to subscribe to the package's [RSS feed](https://undocumeantit.github.io/repos/l10n/pckg/sylly.", lang,
+    "To automatically get updates, consider [adding the repository to your R configuration](https://undocumeantit.github.io/repos).\n",
+    "You might also want to subscribe to the package's [RSS feed](https://undocumeantit.github.io/repos/l10n/pckg/sylly.", lang,
     "/RSS.xml) to get notified of new releases.\n\n",
     "If you're running a Debian based operating system, you might be interested in the\n",
     "[precompiled *.deb packages](https://undocumeantit.github.io/repos/l10n/pckg/sylly.", lang, "/deb_repo.html).\n\n",
@@ -352,7 +351,6 @@ sylly_langpack_skeleton <- function(
   year=format(Sys.Date(), "%Y"),
   date=format(Sys.Date(), "%Y-%m-%d"),
   version="0.1-1",
-  flattr_user="m.eik",
   github_user="unDocUMeantIt",
   example=c("This", "is", "a", "rather", "stupid", "demonstration"),
   dir=NULL,  # if not NULL, writes results directly to dir
@@ -408,7 +406,6 @@ sylly_langpack_skeleton <- function(
     author=author,
     email=email,
     year=year,
-    flattr_user=flattr_user,
     github_user=github_user,
     dir=main_dir,
     overwrite=overwrite
@@ -455,7 +452,6 @@ setMethod("sylly_langpack", signature(hyph.pattern="kRp.hyph.pat"),
     year=format(Sys.Date(), "%Y"),
     date=format(Sys.Date(), "%Y-%m-%d"),
     version="0.1-1",
-    flattr_user="m.eik",
     github_user="unDocUMeantIt",
     example=c("This", "is", "a", "rather", "stupid", "demonstration"),
     overwrite=FALSE
@@ -474,7 +470,6 @@ setMethod("sylly_langpack", signature(hyph.pattern="kRp.hyph.pat"),
       year=year,
       date=date,
       version=version,
-      flattr_user=flattr_user,
       github_user=github_user,
       example=example,
       dir=dir,

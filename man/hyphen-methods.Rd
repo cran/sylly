@@ -33,7 +33,8 @@ hyphen_c(words, ...)
 
 \item{...}{Only used for the method generic.}
 
-\item{hyph.pattern}{Either an object of class \code{\link[sylly]{kRp.hyph.pat-class}}, or
+\item{hyph.pattern}{Either an object of class \code{\link[sylly:kRp.hyph.pat-class]{kRp.hyph.pat}},
+      or
 a valid character string naming the language of the patterns to be used (must already be loaded,
       see details).}
 
@@ -62,7 +63,7 @@ respectively. For the latter two options,
       you can alternatively use the shortcut methods \code{hyphen_df} or  \code{hyphen_c}.}
 }
 \value{
-An object of class \code{\link[sylly]{kRp.hyphen-class}},
+An object of class \code{\link[sylly:kRp.hyphen-class]{kRp.hyphen}},
       \code{data.frame} or a numeric vector, depending on the value
    of the \code{as} argument.
 }
@@ -71,9 +72,12 @@ These methods implement word hyphenation, based on Liang's algorithm.
 }
 \details{
 For this to work the function must be told which pattern set it should use to
-find the right hyphenation spots. The most straight forward way to add suuport
-for a particular language during a session is to load  the appropriate language
+find the right hyphenation spots. The most straight forward way to add support
+for a particular language during a session is to load an appropriate language
 package (e.g., the package \code{sylly.en} for English or \code{sylly.de} for German).
+See \code{\link[sylly:available.sylly.lang]{available.sylly.lang}} and
+\code{\link[sylly:install.sylly.lang]{install.sylly.lang}} for more informatin on how
+to get language support packages.
 
 After such a package was loaded, you can simply use the language abbreviation as
 the value for the \code{hyph.pattern} argument (like \code{"en"} for the English
@@ -103,6 +107,8 @@ Liang, F.M. (1983). \emph{Word Hy-phen-a-tion by Com-put-er}.
 }
 \seealso{
 \code{\link[sylly:read.hyph.pat]{read.hyph.pat}},
-   \code{\link[sylly:manage.hyph.pat]{manage.hyph.pat}}
+   \code{\link[sylly:manage.hyph.pat]{manage.hyph.pat}},
+   \code{\link[sylly:available.sylly.lang]{available.sylly.lang}}, and
+   \code{\link[sylly:install.sylly.lang]{install.sylly.lang}}
 }
 \keyword{hyphenation}

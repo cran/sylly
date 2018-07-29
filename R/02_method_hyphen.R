@@ -21,9 +21,12 @@
 #' These methods implement word hyphenation, based on Liang's algorithm.
 #'
 #' For this to work the function must be told which pattern set it should use to
-#' find the right hyphenation spots. The most straight forward way to add suuport
-#' for a particular language during a session is to load  the appropriate language
+#' find the right hyphenation spots. The most straight forward way to add support
+#' for a particular language during a session is to load an appropriate language
 #' package (e.g., the package \code{sylly.en} for English or \code{sylly.de} for German).
+#' See \code{\link[sylly:available.sylly.lang]{available.sylly.lang}} and
+#' \code{\link[sylly:install.sylly.lang]{install.sylly.lang}} for more informatin on how
+#' to get language support packages.
 #'
 #' After such a package was loaded, you can simply use the language abbreviation as
 #' the value for the \code{hyph.pattern} argument (like \code{"en"} for the English
@@ -36,7 +39,7 @@
 #' object of class \code{kRp.hyph.pat}, alternatively.
 #'
 #' @param words Either a character vector with words/tokens to be hyphenated, or any tagged text object generated with the \code{koRpus} package.
-#' @param hyph.pattern Either an object of class \code{\link[sylly]{kRp.hyph.pat-class}}, or
+#' @param hyph.pattern Either an object of class \code{\link[sylly:kRp.hyph.pat-class]{kRp.hyph.pat}}, or
 #'    a valid character string naming the language of the patterns to be used (must already be loaded, see details).
 #' @param min.length Integer, number of letters a word must have for considering a hyphenation. \code{hyphen} will
 #'    not split words after the first or before the last letter, so values smaller than 4 are not useful.
@@ -49,13 +52,15 @@
 #' @param as A character string defining the class of the object to be returned. Defaults to \code{"kRp.hyphen"}, but can also be
 #'    set to \code{"data.frame"} or \code{"numeric"}, returning only the central \code{data.frame} or the numeric vector of counted syllables,
 #'    respectively. For the latter two options, you can alternatively use the shortcut methods \code{hyphen_df} or  \code{hyphen_c}.
-#' @return An object of class \code{\link[sylly]{kRp.hyphen-class}}, \code{data.frame} or a numeric vector, depending on the value
+#' @return An object of class \code{\link[sylly:kRp.hyphen-class]{kRp.hyphen}}, \code{data.frame} or a numeric vector, depending on the value
 #'    of the \code{as} argument.
 #' @keywords hyphenation
 # @author m.eik michalke \email{meik.michalke@@hhu.de}
 #' @seealso
 #'    \code{\link[sylly:read.hyph.pat]{read.hyph.pat}},
-#'    \code{\link[sylly:manage.hyph.pat]{manage.hyph.pat}}
+#'    \code{\link[sylly:manage.hyph.pat]{manage.hyph.pat}},
+#'    \code{\link[sylly:available.sylly.lang]{available.sylly.lang}}, and
+#'    \code{\link[sylly:install.sylly.lang]{install.sylly.lang}}
 #' @references
 #'  Liang, F.M. (1983). \emph{Word Hy-phen-a-tion by Com-put-er}.
 #'      Dissertation, Stanford University, Dept. of Computer Science.

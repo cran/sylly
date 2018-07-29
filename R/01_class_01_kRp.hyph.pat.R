@@ -1,4 +1,4 @@
-# Copyright 2010-2017 Meik Michalke <meik.michalke@hhu.de>
+# Copyright 2010-2018 Meik Michalke <meik.michalke@hhu.de>
 #
 # This file is part of the R package sylly.
 #
@@ -25,6 +25,12 @@
 #' function \code{sylly:::koRpus2sylly} which take the path to the old file as its first argument. Be aware that
 #' calling this function will overwrite the old file in-place, so you should make a backup first!
 #'
+#' @section Contructor function:
+#' Should you need to manually generate objects of this class (which should rarely be the case), the contructor function 
+#' \code{kRp_hyph_pat(...)} can be used instead of
+#' \code{new("kRp.hyph.pat", ...)}. Whenever possible, stick to
+#' \code{\link[sylly:read.hyph.pat]{read.hyph.pat}}.
+#' 
 #' @slot lang A character string, naming the language that is assumed for the patterns in this object
 #' @slot pattern A matrix with three colums:
 #'    \describe{
@@ -33,14 +39,15 @@
 #'      \item{\code{nums}:}{The hyphenation number code for the pattern.}
 #'    }
 #' @name kRp.hyph.pat,-class
-#' @aliases kRp.hyph.pat,-class kRp.hyph.pat-class
+#' @aliases kRp.hyph.pat-class
 #' @import methods
 #' @keywords classes
 # @author m.eik michalke \email{meik.michalke@@hhu.de}
-#' @export
+#' @export kRp_hyph_pat
+#' @exportClass kRp.hyph.pat
 #' @rdname kRp.hyph.pat-class
 
-setClass("kRp.hyph.pat",
+kRp_hyph_pat <- setClass("kRp.hyph.pat",
     representation=representation(
     lang="character",
     pattern="matrix"),
@@ -50,8 +57,8 @@ setClass("kRp.hyph.pat",
 )
 
 setValidity("kRp.hyph.pat", function(object){
-  lang <- object@lang
-  pattern <- object@pattern
+  lang <- slot(object, "lang")
+  pattern <- slot(object, "pattern")
 
   pattern.names <- dimnames(pattern)[[2]]
 
@@ -68,7 +75,7 @@ setValidity("kRp.hyph.pat", function(object){
 
 # this internally used S4 class is an optimized version of kRp.hyph.pat,
 # using an environment instead of a matrix for the pattern slot for better speed
-setClass("kRp.hyph.pat.env",
+kRp_hyph_pat_env <- setClass("kRp.hyph.pat.env",
   representation=representation(
     lang="character",
     min.pat="numeric",

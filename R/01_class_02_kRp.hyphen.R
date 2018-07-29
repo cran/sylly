@@ -1,4 +1,4 @@
-# Copyright 2010-2017 Meik Michalke <meik.michalke@hhu.de>
+# Copyright 2010-2018 Meik Michalke <meik.michalke@hhu.de>
 #
 # This file is part of the R package sylly.
 #
@@ -19,6 +19,12 @@
 #'
 #' This class is used for objects that are returned by \code{\link[sylly:hyphen]{hyphen}}.
 #'
+#' @section Contructor function:
+#' Should you need to manually generate objects of this class (which should rarely be the case), the contructor function 
+#' \code{kRp_hyphen(...)} can be used instead of
+#' \code{new("kRp.hyphen", ...)}. Whenever possible, stick to
+#' \code{\link[sylly:hyphen]{hyphen}}.
+#' 
 #' @slot lang A character string, naming the language that is assumed for the analized text in this object
 #' @slot desc Descriptive statistics of the analyzed text.
 #' @slot hyphen A data.frame with two columns:
@@ -27,14 +33,15 @@
 #'   \item{\code{word}:}{The hyphenated word}
 #' }
 #' @name kRp.hyphen,-class
-#' @aliases kRp.hyphen,-class kRp.hyphen-class
+#' @aliases kRp.hyphen-class
 #' @import methods
 #' @keywords classes
 # @author m.eik michalke \email{meik.michalke@@hhu.de}
-#' @export
+#' @export kRp_hyphen
+#' @exportClass kRp.hyphen
 #' @rdname kRp.hyphen-class
 
-setClass("kRp.hyphen",
+kRp_hyphen <- setClass("kRp.hyphen",
     representation=representation(
     lang="character",
     desc="list",
