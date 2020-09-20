@@ -30,13 +30,13 @@
 \alias{[[<-,kRp.hyphen,ANY,ANY-method}
 \title{Getter/setter methods for sylly objects}
 \usage{
-describe(obj)
+describe(obj, ...)
 
 \S4method{describe}{kRp.hyphen}(obj)
 
-describe(obj) <- value
+describe(obj, ...) <- value
 
-\S4method{describe}{kRp.hyphen}(obj) <- value
+\S4method{describe}{kRp.hyphen}(obj, ...) <- value
 
 language(obj)
 
@@ -64,6 +64,8 @@ hyphenText(obj) <- value
 }
 \arguments{
 \item{obj}{An object of class \code{\link[sylly:kRp.hyphen-class]{kRp.hyphen}}.}
+
+\item{...}{Additional arguments as defined by respective methods.}
 
 \item{value}{A value to set.}
 

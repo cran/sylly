@@ -13,8 +13,8 @@ The DESCRIPTION file:
 \tabular{ll}{
 Package: \tab sylly\cr
 Type: \tab Package\cr
-Version: \tab 0.1-5\cr
-Date: \tab 2018-07-29\cr
+Version: \tab 0.1-6\cr
+Date: \tab 2020-09-19\cr
 Depends: \tab R (>= 3.0.0)\cr
 Encoding: \tab UTF-8\cr
 License: \tab GPL (>= 3)\cr

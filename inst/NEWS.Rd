@@ -1,6 +1,28 @@
 \name{NEWS}
 \title{News for Package 'sylly'}
 \encoding{UTF-8}
+\section{Changes in sylly version 0.1-6 (2020-09-19)}{
+  \subsection{unreleased}{
+    \itemize{
+      \item this version is under development
+    }
+  }
+  \subsection{fixed}{
+    \itemize{
+      \item \code{hyphen()}: fixed the automatic adjustment of hyph.max.token.length that
+        was introduced with 0.1-1 but turned out to be broken, at least with R 4.x
+    }
+  }
+  \subsection{changed}{
+    \itemize{
+      \item \code{sylly:::kRp.hyphen.calc()}: replaced a for loop with \code{apply()}, almost twice
+        as fast now (without caching)
+      \item \code{hyphen()}: optimized processing speed, saves ~75\% if your time now
+      \item \code{describe()}: the generic now provides the dots argument (\code{"..."}) to allow
+        adding further arguments by different methods
+    }
+  }
+}
 \section{Changes in sylly version 0.1-5 (2018-07-29)}{
   \subsection{fixed}{
     \itemize{
@@ -76,7 +98,7 @@
       \item initial release
       \item \code{show()}: method now only truncates the mid section of samples larger than
         15 words
-      \item all.patterns: this internal cache object is now dynymically generated
+      \item all.patterns: this internal cache object is now dynamically generated
         when the package is loaded, which slows down the loading process but saves
         ~6.5MB in package size
       \item hyph.max.token.length: this object was moved into the internal .sylly.env
